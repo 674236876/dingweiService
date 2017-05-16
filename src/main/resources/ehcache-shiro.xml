@@ -1,0 +1,25 @@
+<!-- 文件属性介绍
+     maxElementsInMemory:缓存最大个数
+     eternal            :对象是否永久有效，一旦设置了true，则timeout不起作用
+     timeToIdleSeconds  :设置对象在失效前的允许闲置时间（s）。仅当eternal=false对象不是永久有效时使用，可选属性，默认值是0，也就是可闲置时间无穷大
+     timeToLiveSeconds  :设置对象在失效前的允许存活时间（s）。最大时间介于创建时间和失效时间之间。仅当eternal=false对象不是永久有效时使用，默认是0，也就是对象存活时间无穷大
+     overflowToDisk     :当内存中对象数量达到maxElementsInMemory,Ehcache将会把对象写入磁盘
+     diskPersistent     :是否缓存虚拟机重启期数据，默认值为false
+     diskExpiryThreadIntervalSeconds:磁盘失效线程运行时间间隔，默认120秒
+     memoryStoreEvictionPolicy      :当达到maxElementsInMemory限制时，Ehcache将会根据指定策略去清理内存，默认策略是LRU。可以设置为FIFO或者LFU
+     clearOnFlush       :内存数量最大时是否清除
+-->
+
+<ehcache updateCheck="false" name="shiroCache">
+
+    <defaultCache
+
+            maxElementsInMemory="10000"
+            eternal="false"
+            timeToIdleSeconds="120"
+            timeToLiveSeconds="120"
+            overflowToDisk="false"
+            diskPersistent="false"
+            diskExpiryThreadIntervalSeconds="120"
+            />
+</ehcache>

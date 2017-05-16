@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myd.web.dao.ChatusergrpMapMapper" >
+  <resultMap id="BaseResultMap" type="com.myd.web.model.ChatusergrpMap" >
+    <result column="ID" property="id" jdbcType="CHAR" />
+    <result column="PHONENUMBER" property="phonenumber" jdbcType="VARCHAR" />
+    <result column="CODE" property="code" jdbcType="VARCHAR" />
+    <result column="GROUPNAME" property="groupname" jdbcType="VARCHAR" />
+    <result column="LEVEL" property="level" jdbcType="INTEGER" />
+    <result column="TYPE" property="type" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, PHONENUMBER, CODE, GROUPNAME, LEVEL, TYPE
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from chatusergrp_map
+    where id = #{id,jdbcType=String}
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myd.web.model.ChatusergrpMapExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from chatusergrp_map
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.myd.web.model.ChatusergrpMapExample" >
+    delete from chatusergrp_map
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myd.web.model.ChatusergrpMap" >
+    insert into chatusergrp_map (ID, PHONENUMBER, CODE, 
+      GROUPNAME, LEVEL, TYPE
+      )
+    values (#{id,jdbcType=CHAR}, #{phonenumber,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}, 
+      #{groupname,jdbcType=VARCHAR}, #{level,jdbcType=INTEGER}, #{type,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.myd.web.model.ChatusergrpMap" >
+    insert into chatusergrp_map
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="phonenumber != null" >
+        PHONENUMBER,
+      </if>
+      <if test="code != null" >
+        CODE,
+      </if>
+      <if test="groupname != null" >
+        GROUPNAME,
+      </if>
+      <if test="level != null" >
+        LEVEL,
+      </if>
+      <if test="type != null" >
+        TYPE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=CHAR},
+      </if>
+      <if test="phonenumber != null" >
+        #{phonenumber,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null" >
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="groupname != null" >
+        #{groupname,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null" >
+        #{level,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myd.web.model.ChatusergrpMapExample" resultType="java.lang.Integer" >
+    select count(*) from chatusergrp_map
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update chatusergrp_map
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=CHAR},
+      </if>
+      <if test="record.phonenumber != null" >
+        PHONENUMBER = #{record.phonenumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.code != null" >
+        CODE = #{record.code,jdbcType=VARCHAR},
+      </if>
+      <if test="record.groupname != null" >
+        GROUPNAME = #{record.groupname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.level != null" >
+        LEVEL = #{record.level,jdbcType=INTEGER},
+      </if>
+      <if test="record.type != null" >
+        TYPE = #{record.type,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update chatusergrp_map
+    set ID = #{record.id,jdbcType=CHAR},
+      PHONENUMBER = #{record.phonenumber,jdbcType=VARCHAR},
+      CODE = #{record.code,jdbcType=VARCHAR},
+      GROUPNAME = #{record.groupname,jdbcType=VARCHAR},
+      LEVEL = #{record.level,jdbcType=INTEGER},
+      TYPE = #{record.type,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <select id="selectByPhoneNumDistinct" parameterType="String" resultType="java.lang.String">
+    select DISTINCT GROUPNAME from chatusergrp_map where PHONENUMBER = #{phoneNum};
+  </select>
+  <select id="selectByGroupDistinct" parameterType="String" resultType="java.lang.String">
+    select DISTINCT PHONENUMBER from chatusergrp_map where GROUPNAME = #{groupName};
+  </select>
+
+</mapper>

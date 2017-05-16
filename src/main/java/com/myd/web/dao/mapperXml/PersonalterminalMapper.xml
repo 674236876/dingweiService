@@ -1,0 +1,458 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myd.web.dao.PersonalterminalMapper" >
+  <resultMap id="BaseResultMap" type="com.myd.web.model.PersonalTerminal" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="groupId" property="groupid" jdbcType="BIGINT" />
+    <result column="ptName" property="ptname" jdbcType="VARCHAR" />
+    <result column="imsi" property="imsi" jdbcType="VARCHAR" />
+    <result column="phoneNumber" property="phonenumber" jdbcType="VARCHAR" />
+    <result column="imageId" property="imageid" jdbcType="BIGINT" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="registTime" property="registtime" jdbcType="TIMESTAMP" />
+    <result column="activeTime" property="activetime" jdbcType="TIMESTAMP" />
+    <result column="gpsTime" property="gpstime" jdbcType="TIMESTAMP" />
+    <result column="lastNotifyTime" property="lastnotifytime" jdbcType="TIMESTAMP" />
+    <result column="orglat" property="orglat" jdbcType="VARCHAR" />
+    <result column="orglon" property="orglon" jdbcType="VARCHAR" />
+    <result column="speed" property="speed" jdbcType="INTEGER" />
+    <result column="altitude" property="altitude" jdbcType="INTEGER" />
+    <result column="directory" property="directory" jdbcType="INTEGER" />
+    <result column="state" property="state" jdbcType="INTEGER" />
+    <result column="online" property="online" jdbcType="INTEGER" />
+    <result column="protocal" property="protocal" jdbcType="INTEGER" />
+    <result column="active" property="active" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, groupId, ptName, imsi, phoneNumber, imageId, description, registTime, activeTime, 
+    gpsTime, lastNotifyTime, orglat, orglon, speed, altitude, directory, state, online, 
+    protocal, active
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myd.web.model.PersonalterminalExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from personalterminal
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from personalterminal
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from personalterminal
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.myd.web.model.PersonalterminalExample" >
+    delete from personalterminal
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myd.web.model.PersonalTerminal" >
+    insert into personalterminal (id, groupId, ptName, 
+      imsi, phoneNumber, imageId, 
+      description, registTime, activeTime, 
+      gpsTime, lastNotifyTime, orglat, 
+      orglon, speed, altitude, 
+      directory, state, online, 
+      protocal, active)
+    values (#{id,jdbcType=BIGINT}, #{groupid,jdbcType=BIGINT}, #{ptname,jdbcType=VARCHAR}, 
+      #{imsi,jdbcType=VARCHAR}, #{phonenumber,jdbcType=VARCHAR}, #{imageid,jdbcType=BIGINT}, 
+      #{description,jdbcType=VARCHAR}, #{registtime,jdbcType=TIMESTAMP}, #{activetime,jdbcType=TIMESTAMP}, 
+      #{gpstime,jdbcType=TIMESTAMP}, #{lastnotifytime,jdbcType=TIMESTAMP}, #{orglat,jdbcType=VARCHAR}, 
+      #{orglon,jdbcType=VARCHAR}, #{speed,jdbcType=INTEGER}, #{altitude,jdbcType=INTEGER}, 
+      #{directory,jdbcType=INTEGER}, #{state,jdbcType=INTEGER}, #{online,jdbcType=INTEGER}, 
+      #{protocal,jdbcType=INTEGER}, #{active,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.myd.web.model.PersonalTerminal" >
+    insert into personalterminal
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="groupid != null" >
+        groupId,
+      </if>
+      <if test="ptname != null" >
+        ptName,
+      </if>
+      <if test="imsi != null" >
+        imsi,
+      </if>
+      <if test="phonenumber != null" >
+        phoneNumber,
+      </if>
+      <if test="imageid != null" >
+        imageId,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="registtime != null" >
+        registTime,
+      </if>
+      <if test="activetime != null" >
+        activeTime,
+      </if>
+      <if test="gpstime != null" >
+        gpsTime,
+      </if>
+      <if test="lastnotifytime != null" >
+        lastNotifyTime,
+      </if>
+      <if test="orglat != null" >
+        orglat,
+      </if>
+      <if test="orglon != null" >
+        orglon,
+      </if>
+      <if test="speed != null" >
+        speed,
+      </if>
+      <if test="altitude != null" >
+        altitude,
+      </if>
+      <if test="directory != null" >
+        directory,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+      <if test="online != null" >
+        online,
+      </if>
+      <if test="protocal != null" >
+        protocal,
+      </if>
+      <if test="active != null" >
+        active,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="groupid != null" >
+        #{groupid,jdbcType=BIGINT},
+      </if>
+      <if test="ptname != null" >
+        #{ptname,jdbcType=VARCHAR},
+      </if>
+      <if test="imsi != null" >
+        #{imsi,jdbcType=VARCHAR},
+      </if>
+      <if test="phonenumber != null" >
+        #{phonenumber,jdbcType=VARCHAR},
+      </if>
+      <if test="imageid != null" >
+        #{imageid,jdbcType=BIGINT},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="registtime != null" >
+        #{registtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="activetime != null" >
+        #{activetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gpstime != null" >
+        #{gpstime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastnotifytime != null" >
+        #{lastnotifytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orglat != null" >
+        #{orglat,jdbcType=VARCHAR},
+      </if>
+      <if test="orglon != null" >
+        #{orglon,jdbcType=VARCHAR},
+      </if>
+      <if test="speed != null" >
+        #{speed,jdbcType=INTEGER},
+      </if>
+      <if test="altitude != null" >
+        #{altitude,jdbcType=INTEGER},
+      </if>
+      <if test="directory != null" >
+        #{directory,jdbcType=INTEGER},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=INTEGER},
+      </if>
+      <if test="online != null" >
+        #{online,jdbcType=INTEGER},
+      </if>
+      <if test="protocal != null" >
+        #{protocal,jdbcType=INTEGER},
+      </if>
+      <if test="active != null" >
+        #{active,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myd.web.model.PersonalterminalExample" resultType="java.lang.Integer" >
+    select count(*) from personalterminal
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update personalterminal
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.groupid != null" >
+        groupId = #{record.groupid,jdbcType=BIGINT},
+      </if>
+      <if test="record.ptname != null" >
+        ptName = #{record.ptname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.imsi != null" >
+        imsi = #{record.imsi,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phonenumber != null" >
+        phoneNumber = #{record.phonenumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.imageid != null" >
+        imageId = #{record.imageid,jdbcType=BIGINT},
+      </if>
+      <if test="record.description != null" >
+        description = #{record.description,jdbcType=VARCHAR},
+      </if>
+      <if test="record.registtime != null" >
+        registTime = #{record.registtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.activetime != null" >
+        activeTime = #{record.activetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.gpstime != null" >
+        gpsTime = #{record.gpstime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lastnotifytime != null" >
+        lastNotifyTime = #{record.lastnotifytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.orglat != null" >
+        orglat = #{record.orglat,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orglon != null" >
+        orglon = #{record.orglon,jdbcType=VARCHAR},
+      </if>
+      <if test="record.speed != null" >
+        speed = #{record.speed,jdbcType=INTEGER},
+      </if>
+      <if test="record.altitude != null" >
+        altitude = #{record.altitude,jdbcType=INTEGER},
+      </if>
+      <if test="record.directory != null" >
+        directory = #{record.directory,jdbcType=INTEGER},
+      </if>
+      <if test="record.state != null" >
+        state = #{record.state,jdbcType=INTEGER},
+      </if>
+      <if test="record.online != null" >
+        online = #{record.online,jdbcType=INTEGER},
+      </if>
+      <if test="record.protocal != null" >
+        protocal = #{record.protocal,jdbcType=INTEGER},
+      </if>
+      <if test="record.active != null" >
+        active = #{record.active,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update personalterminal
+    set id = #{record.id,jdbcType=BIGINT},
+      groupId = #{record.groupid,jdbcType=BIGINT},
+      ptName = #{record.ptname,jdbcType=VARCHAR},
+      imsi = #{record.imsi,jdbcType=VARCHAR},
+      phoneNumber = #{record.phonenumber,jdbcType=VARCHAR},
+      imageId = #{record.imageid,jdbcType=BIGINT},
+      description = #{record.description,jdbcType=VARCHAR},
+      registTime = #{record.registtime,jdbcType=TIMESTAMP},
+      activeTime = #{record.activetime,jdbcType=TIMESTAMP},
+      gpsTime = #{record.gpstime,jdbcType=TIMESTAMP},
+      lastNotifyTime = #{record.lastnotifytime,jdbcType=TIMESTAMP},
+      orglat = #{record.orglat,jdbcType=VARCHAR},
+      orglon = #{record.orglon,jdbcType=VARCHAR},
+      speed = #{record.speed,jdbcType=INTEGER},
+      altitude = #{record.altitude,jdbcType=INTEGER},
+      directory = #{record.directory,jdbcType=INTEGER},
+      state = #{record.state,jdbcType=INTEGER},
+      online = #{record.online,jdbcType=INTEGER},
+      protocal = #{record.protocal,jdbcType=INTEGER},
+      active = #{record.active,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myd.web.model.PersonalTerminal" >
+    update personalterminal
+    <set >
+      <if test="groupid != null" >
+        groupId = #{groupid,jdbcType=BIGINT},
+      </if>
+      <if test="ptname != null" >
+        ptName = #{ptname,jdbcType=VARCHAR},
+      </if>
+      <if test="imsi != null" >
+        imsi = #{imsi,jdbcType=VARCHAR},
+      </if>
+      <if test="phonenumber != null" >
+        phoneNumber = #{phonenumber,jdbcType=VARCHAR},
+      </if>
+      <if test="imageid != null" >
+        imageId = #{imageid,jdbcType=BIGINT},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="registtime != null" >
+        registTime = #{registtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="activetime != null" >
+        activeTime = #{activetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gpstime != null" >
+        gpsTime = #{gpstime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastnotifytime != null" >
+        lastNotifyTime = #{lastnotifytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orglat != null" >
+        orglat = #{orglat,jdbcType=VARCHAR},
+      </if>
+      <if test="orglon != null" >
+        orglon = #{orglon,jdbcType=VARCHAR},
+      </if>
+      <if test="speed != null" >
+        speed = #{speed,jdbcType=INTEGER},
+      </if>
+      <if test="altitude != null" >
+        altitude = #{altitude,jdbcType=INTEGER},
+      </if>
+      <if test="directory != null" >
+        directory = #{directory,jdbcType=INTEGER},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=INTEGER},
+      </if>
+      <if test="online != null" >
+        online = #{online,jdbcType=INTEGER},
+      </if>
+      <if test="protocal != null" >
+        protocal = #{protocal,jdbcType=INTEGER},
+      </if>
+      <if test="active != null" >
+        active = #{active,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myd.web.model.PersonalTerminal" >
+    update personalterminal
+    set groupId = #{groupid,jdbcType=BIGINT},
+      ptName = #{ptname,jdbcType=VARCHAR},
+      imsi = #{imsi,jdbcType=VARCHAR},
+      phoneNumber = #{phonenumber,jdbcType=VARCHAR},
+      imageId = #{imageid,jdbcType=BIGINT},
+      description = #{description,jdbcType=VARCHAR},
+      registTime = #{registtime,jdbcType=TIMESTAMP},
+      activeTime = #{activetime,jdbcType=TIMESTAMP},
+      gpsTime = #{gpstime,jdbcType=TIMESTAMP},
+      lastNotifyTime = #{lastnotifytime,jdbcType=TIMESTAMP},
+      orglat = #{orglat,jdbcType=VARCHAR},
+      orglon = #{orglon,jdbcType=VARCHAR},
+      speed = #{speed,jdbcType=INTEGER},
+      altitude = #{altitude,jdbcType=INTEGER},
+      directory = #{directory,jdbcType=INTEGER},
+      state = #{state,jdbcType=INTEGER},
+      online = #{online,jdbcType=INTEGER},
+      protocal = #{protocal,jdbcType=INTEGER},
+      active = #{active,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="getEntIdByptId" parameterType="java.lang.Long" resultType="java.lang.String">
+    select e.entid
+    from
+      entgroup_info e
+    left join
+      personalterminal p
+    on e.groupid = p.groupid
+    where p.id = #{ptid};
+  </select>
+</mapper>

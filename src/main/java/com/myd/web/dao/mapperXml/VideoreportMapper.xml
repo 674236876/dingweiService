@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myd.web.dao.VideoreportMapper" >
+  <resultMap id="BaseResultMap" type="com.myd.web.model.Videoreport" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="imsi" property="imsi" jdbcType="VARCHAR" />
+    <result column="ptName" property="ptname" jdbcType="VARCHAR" />
+    <result column="ptid" property="ptid" jdbcType="VARCHAR" />
+    <result column="lon" property="lon" jdbcType="VARCHAR" />
+    <result column="lat" property="lat" jdbcType="VARCHAR" />
+    <result column="workTime" property="worktime" jdbcType="TIMESTAMP" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="filePath" property="filepath" jdbcType="VARCHAR" />
+    <result column="batchNum" property="batchnum" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, imsi, ptName, ptid, lon, lat, workTime, remark, filePath, batchNum
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myd.web.model.VideoreportExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from videoreport
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from videoreport
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from videoreport
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.myd.web.model.VideoreportExample" >
+    delete from videoreport
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myd.web.model.Videoreport" >
+    insert into videoreport (id, imsi, ptName, 
+      ptid, lon, lat, workTime, 
+      remark, filePath, batchNum
+      )
+    values (#{id,jdbcType=INTEGER}, #{imsi,jdbcType=VARCHAR}, #{ptname,jdbcType=VARCHAR}, 
+      #{ptid,jdbcType=VARCHAR}, #{lon,jdbcType=VARCHAR}, #{lat,jdbcType=VARCHAR}, #{worktime,jdbcType=TIMESTAMP}, 
+      #{remark,jdbcType=VARCHAR}, #{filepath,jdbcType=VARCHAR}, #{batchnum,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.myd.web.model.Videoreport" >
+    insert into videoreport
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="imsi != null" >
+        imsi,
+      </if>
+      <if test="ptname != null" >
+        ptName,
+      </if>
+      <if test="ptid != null" >
+        ptid,
+      </if>
+      <if test="lon != null" >
+        lon,
+      </if>
+      <if test="lat != null" >
+        lat,
+      </if>
+      <if test="worktime != null" >
+        workTime,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="filepath != null" >
+        filePath,
+      </if>
+      <if test="batchnum != null" >
+        batchNum,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="imsi != null" >
+        #{imsi,jdbcType=VARCHAR},
+      </if>
+      <if test="ptname != null" >
+        #{ptname,jdbcType=VARCHAR},
+      </if>
+      <if test="ptid != null" >
+        #{ptid,jdbcType=VARCHAR},
+      </if>
+      <if test="lon != null" >
+        #{lon,jdbcType=VARCHAR},
+      </if>
+      <if test="lat != null" >
+        #{lat,jdbcType=VARCHAR},
+      </if>
+      <if test="worktime != null" >
+        #{worktime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="filepath != null" >
+        #{filepath,jdbcType=VARCHAR},
+      </if>
+      <if test="batchnum != null" >
+        #{batchnum,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myd.web.model.VideoreportExample" resultType="java.lang.Integer" >
+    select count(*) from videoreport
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update videoreport
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.imsi != null" >
+        imsi = #{record.imsi,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ptname != null" >
+        ptName = #{record.ptname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ptid != null" >
+        ptid = #{record.ptid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lon != null" >
+        lon = #{record.lon,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lat != null" >
+        lat = #{record.lat,jdbcType=VARCHAR},
+      </if>
+      <if test="record.worktime != null" >
+        workTime = #{record.worktime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.filepath != null" >
+        filePath = #{record.filepath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.batchnum != null" >
+        batchNum = #{record.batchnum,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update videoreport
+    set id = #{record.id,jdbcType=INTEGER},
+      imsi = #{record.imsi,jdbcType=VARCHAR},
+      ptName = #{record.ptname,jdbcType=VARCHAR},
+      ptid = #{record.ptid,jdbcType=VARCHAR},
+      lon = #{record.lon,jdbcType=VARCHAR},
+      lat = #{record.lat,jdbcType=VARCHAR},
+      workTime = #{record.worktime,jdbcType=TIMESTAMP},
+      remark = #{record.remark,jdbcType=VARCHAR},
+      filePath = #{record.filepath,jdbcType=VARCHAR},
+      batchNum = #{record.batchnum,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myd.web.model.Videoreport" >
+    update videoreport
+    <set >
+      <if test="imsi != null" >
+        imsi = #{imsi,jdbcType=VARCHAR},
+      </if>
+      <if test="ptname != null" >
+        ptName = #{ptname,jdbcType=VARCHAR},
+      </if>
+      <if test="ptid != null" >
+        ptid = #{ptid,jdbcType=VARCHAR},
+      </if>
+      <if test="lon != null" >
+        lon = #{lon,jdbcType=VARCHAR},
+      </if>
+      <if test="lat != null" >
+        lat = #{lat,jdbcType=VARCHAR},
+      </if>
+      <if test="worktime != null" >
+        workTime = #{worktime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="filepath != null" >
+        filePath = #{filepath,jdbcType=VARCHAR},
+      </if>
+      <if test="batchnum != null" >
+        batchNum = #{batchnum,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myd.web.model.Videoreport" >
+    update videoreport
+    set imsi = #{imsi,jdbcType=VARCHAR},
+      ptName = #{ptname,jdbcType=VARCHAR},
+      ptid = #{ptid,jdbcType=VARCHAR},
+      lon = #{lon,jdbcType=VARCHAR},
+      lat = #{lat,jdbcType=VARCHAR},
+      workTime = #{worktime,jdbcType=TIMESTAMP},
+      remark = #{remark,jdbcType=VARCHAR},
+      filePath = #{filepath,jdbcType=VARCHAR},
+      batchNum = #{batchnum,jdbcType=INTEGER}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

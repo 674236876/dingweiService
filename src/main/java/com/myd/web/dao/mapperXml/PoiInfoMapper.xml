@@ -1,0 +1,351 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myd.web.dao.PoiInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.myd.web.model.PoiInfo" >
+    <result column="ID" property="id" jdbcType="CHAR" />
+    <result column="ENTID" property="entid" jdbcType="CHAR" />
+    <result column="OPTID" property="optid" jdbcType="CHAR" />
+    <result column="LAT" property="lat" jdbcType="VARCHAR" />
+    <result column="LON" property="lon" jdbcType="VARCHAR" />
+    <result column="ZOOM" property="zoom" jdbcType="INTEGER" />
+    <result column="TYPE" property="type" jdbcType="INTEGER" />
+    <result column="LABEL" property="label" jdbcType="VARCHAR" />
+    <result column="USEALARM" property="usealarm" jdbcType="INTEGER" />
+    <result column="RADIUS" property="radius" jdbcType="INTEGER" />
+    <result column="POSITION" property="position" jdbcType="VARCHAR" />
+    <result column="PHONE" property="phone" jdbcType="VARCHAR" />
+    <result column="ZIPCODE" property="zipcode" jdbcType="VARCHAR" />
+    <result column="DESCRIPTION" property="description" jdbcType="VARCHAR" />
+    <result column="ISSHARED" property="isshared" jdbcType="INTEGER" />
+    <result column="BAIDULNG" property="baidulng" jdbcType="VARCHAR" />
+    <result column="BAIDULAT" property="baidulat" jdbcType="VARCHAR" />
+    <result column="GOOGLELON" property="googlelon" jdbcType="VARCHAR" />
+    <result column="GOOGLELAT" property="googlelat" jdbcType="VARCHAR" />
+    <result column="uploadTime" property="uploadtime" jdbcType="DATE" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, ENTID, OPTID, LAT, LON, ZOOM, TYPE, LABEL, USEALARM, RADIUS, POSITION, PHONE, 
+    ZIPCODE, DESCRIPTION, ISSHARED, BAIDULNG, BAIDULAT, GOOGLELON, GOOGLELAT, uploadTime
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.myd.web.model.PoiInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from poi_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.myd.web.model.PoiInfoExample" >
+    delete from poi_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myd.web.model.PoiInfo" >
+    insert into poi_info (ID, ENTID, OPTID, LAT, 
+      LON, ZOOM, TYPE, LABEL, 
+      USEALARM, RADIUS, POSITION, 
+      PHONE, ZIPCODE, DESCRIPTION, 
+      ISSHARED, BAIDULNG, BAIDULAT, 
+      GOOGLELON, GOOGLELAT, uploadTime
+      )
+    values (#{id,jdbcType=CHAR}, #{entid,jdbcType=CHAR}, #{optid,jdbcType=CHAR}, #{lat,jdbcType=VARCHAR}, 
+      #{lon,jdbcType=VARCHAR}, #{zoom,jdbcType=INTEGER}, #{type,jdbcType=INTEGER}, #{label,jdbcType=VARCHAR}, 
+      #{usealarm,jdbcType=INTEGER}, #{radius,jdbcType=INTEGER}, #{position,jdbcType=VARCHAR}, 
+      #{phone,jdbcType=VARCHAR}, #{zipcode,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
+      #{isshared,jdbcType=INTEGER}, #{baidulng,jdbcType=VARCHAR}, #{baidulat,jdbcType=VARCHAR}, 
+      #{googlelon,jdbcType=VARCHAR}, #{googlelat,jdbcType=VARCHAR}, #{uploadtime,jdbcType=DATE}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.myd.web.model.PoiInfo" >
+    insert into poi_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="entid != null" >
+        ENTID,
+      </if>
+      <if test="optid != null" >
+        OPTID,
+      </if>
+      <if test="lat != null" >
+        LAT,
+      </if>
+      <if test="lon != null" >
+        LON,
+      </if>
+      <if test="zoom != null" >
+        ZOOM,
+      </if>
+      <if test="type != null" >
+        TYPE,
+      </if>
+      <if test="label != null" >
+        LABEL,
+      </if>
+      <if test="usealarm != null" >
+        USEALARM,
+      </if>
+      <if test="radius != null" >
+        RADIUS,
+      </if>
+      <if test="position != null" >
+        POSITION,
+      </if>
+      <if test="phone != null" >
+        PHONE,
+      </if>
+      <if test="zipcode != null" >
+        ZIPCODE,
+      </if>
+      <if test="description != null" >
+        DESCRIPTION,
+      </if>
+      <if test="isshared != null" >
+        ISSHARED,
+      </if>
+      <if test="baidulng != null" >
+        BAIDULNG,
+      </if>
+      <if test="baidulat != null" >
+        BAIDULAT,
+      </if>
+      <if test="googlelon != null" >
+        GOOGLELON,
+      </if>
+      <if test="googlelat != null" >
+        GOOGLELAT,
+      </if>
+      <if test="uploadtime != null" >
+        uploadTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=CHAR},
+      </if>
+      <if test="entid != null" >
+        #{entid,jdbcType=CHAR},
+      </if>
+      <if test="optid != null" >
+        #{optid,jdbcType=CHAR},
+      </if>
+      <if test="lat != null" >
+        #{lat,jdbcType=VARCHAR},
+      </if>
+      <if test="lon != null" >
+        #{lon,jdbcType=VARCHAR},
+      </if>
+      <if test="zoom != null" >
+        #{zoom,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="label != null" >
+        #{label,jdbcType=VARCHAR},
+      </if>
+      <if test="usealarm != null" >
+        #{usealarm,jdbcType=INTEGER},
+      </if>
+      <if test="radius != null" >
+        #{radius,jdbcType=INTEGER},
+      </if>
+      <if test="position != null" >
+        #{position,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="zipcode != null" >
+        #{zipcode,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="isshared != null" >
+        #{isshared,jdbcType=INTEGER},
+      </if>
+      <if test="baidulng != null" >
+        #{baidulng,jdbcType=VARCHAR},
+      </if>
+      <if test="baidulat != null" >
+        #{baidulat,jdbcType=VARCHAR},
+      </if>
+      <if test="googlelon != null" >
+        #{googlelon,jdbcType=VARCHAR},
+      </if>
+      <if test="googlelat != null" >
+        #{googlelat,jdbcType=VARCHAR},
+      </if>
+      <if test="uploadtime != null" >
+        #{uploadtime,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myd.web.model.PoiInfoExample" resultType="java.lang.Integer" >
+    select count(*) from poi_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update poi_info
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=CHAR},
+      </if>
+      <if test="record.entid != null" >
+        ENTID = #{record.entid,jdbcType=CHAR},
+      </if>
+      <if test="record.optid != null" >
+        OPTID = #{record.optid,jdbcType=CHAR},
+      </if>
+      <if test="record.lat != null" >
+        LAT = #{record.lat,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lon != null" >
+        LON = #{record.lon,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zoom != null" >
+        ZOOM = #{record.zoom,jdbcType=INTEGER},
+      </if>
+      <if test="record.type != null" >
+        TYPE = #{record.type,jdbcType=INTEGER},
+      </if>
+      <if test="record.label != null" >
+        LABEL = #{record.label,jdbcType=VARCHAR},
+      </if>
+      <if test="record.usealarm != null" >
+        USEALARM = #{record.usealarm,jdbcType=INTEGER},
+      </if>
+      <if test="record.radius != null" >
+        RADIUS = #{record.radius,jdbcType=INTEGER},
+      </if>
+      <if test="record.position != null" >
+        POSITION = #{record.position,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phone != null" >
+        PHONE = #{record.phone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zipcode != null" >
+        ZIPCODE = #{record.zipcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.description != null" >
+        DESCRIPTION = #{record.description,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isshared != null" >
+        ISSHARED = #{record.isshared,jdbcType=INTEGER},
+      </if>
+      <if test="record.baidulng != null" >
+        BAIDULNG = #{record.baidulng,jdbcType=VARCHAR},
+      </if>
+      <if test="record.baidulat != null" >
+        BAIDULAT = #{record.baidulat,jdbcType=VARCHAR},
+      </if>
+      <if test="record.googlelon != null" >
+        GOOGLELON = #{record.googlelon,jdbcType=VARCHAR},
+      </if>
+      <if test="record.googlelat != null" >
+        GOOGLELAT = #{record.googlelat,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uploadtime != null" >
+        uploadTime = #{record.uploadtime,jdbcType=DATE},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update poi_info
+    set ID = #{record.id,jdbcType=CHAR},
+      ENTID = #{record.entid,jdbcType=CHAR},
+      OPTID = #{record.optid,jdbcType=CHAR},
+      LAT = #{record.lat,jdbcType=VARCHAR},
+      LON = #{record.lon,jdbcType=VARCHAR},
+      ZOOM = #{record.zoom,jdbcType=INTEGER},
+      TYPE = #{record.type,jdbcType=INTEGER},
+      LABEL = #{record.label,jdbcType=VARCHAR},
+      USEALARM = #{record.usealarm,jdbcType=INTEGER},
+      RADIUS = #{record.radius,jdbcType=INTEGER},
+      POSITION = #{record.position,jdbcType=VARCHAR},
+      PHONE = #{record.phone,jdbcType=VARCHAR},
+      ZIPCODE = #{record.zipcode,jdbcType=VARCHAR},
+      DESCRIPTION = #{record.description,jdbcType=VARCHAR},
+      ISSHARED = #{record.isshared,jdbcType=INTEGER},
+      BAIDULNG = #{record.baidulng,jdbcType=VARCHAR},
+      BAIDULAT = #{record.baidulat,jdbcType=VARCHAR},
+      GOOGLELON = #{record.googlelon,jdbcType=VARCHAR},
+      GOOGLELAT = #{record.googlelat,jdbcType=VARCHAR},
+      uploadTime = #{record.uploadtime,jdbcType=DATE}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>
